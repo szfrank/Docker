@@ -1,17 +1,10 @@
-FROM php_dazong
-RUN apk add --no-cache --virtual .build-deps \
-    g++ make autoconf
-RUN pecl install -o -f redis \
-&&  rm -rf /tmp/pear \
-&&  echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+#
+# NOTE: THIS DOCKERFILE IS GENERATED VIA "update.sh"
+#
+# PLEASE DO NOT EDIT IT DIRECTLY.
+#
 
-RUN pecl install -o -f mongodb \
-&&  rm -rf /tmp/pear \
-&&  echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
-
-RUN apk del --purge .build-deps \
-&& apk del .phpize-deps \
-&& rm -rf /tmp/*
+FROM frankyu/alpine
 
 LABEL maintainer="Frank Yu <imzhixun@gmail.com>"
 
