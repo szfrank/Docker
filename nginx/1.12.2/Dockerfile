@@ -8,6 +8,7 @@ RUN pecl install -o -f redis \
 RUN pecl install -o -f mongodb \
 &&  rm -rf /tmp/pear \
 &&  echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
+
 RUN apk del --purge .build-deps \
 && apk del .phpize-deps \
 && rm -rf /tmp/*
