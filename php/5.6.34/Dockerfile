@@ -1,4 +1,13 @@
+#
+# NOTE: THIS DOCKERFILE IS GENERATED VIA "update.sh"
+#
+# PLEASE DO NOT EDIT IT DIRECTLY.
+#
+
 FROM frankyu/phpfpm-base
+
+LABEL maintainer="Frank Yu <imzhixun@gmail.com>"
+
 RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && php -r "unlink('composer-setup.php');" \
@@ -21,3 +30,22 @@ RUN docker-php-source extract \
     && rm -r /tmp/stomp.tgz \
     && docker-php-ext-install stomp \
     && docker-php-source delete
+
+RUN apk add --no-cache --virtual .build-deps \
+    g++ make autoconf imagemagick-dev \
+    && pecl install imagick \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable imagick \
+    && apk del .build-deps \
+    && rm -rf /tmp/* \
+    && rm -rf /var/cache/apk/*
+
+RUN apk add --no-cache --virtual .build-deps \
+    g++ make autoconf \
+    && pecl install -o -f mongodb \
+    && rm -rf /tmp/pear \
+    && chmod +x /usr/local/lib/php/extensions/no-debug-non-zts-20131226/mongodb.so \
+    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
+    && apk del .build-deps \
+    && rm -rf /tmp/* \
+    && rm -rf /var/cache/apk/*
