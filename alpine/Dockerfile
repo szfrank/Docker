@@ -11,7 +11,7 @@ RUN apk update && apk upgrade
 
 #时区配置
 ENV TIMEZONE Asia/Shanghai
-RUN apk add tzdata \
+RUN apk add tzdata bash \
 &&  ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime \
 &&  echo $TIMEZONE > /etc/timezone \
 &&  apk del tzdata

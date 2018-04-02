@@ -127,12 +127,12 @@ RUN set -xe \
 		--with-bz2 \
 		--with-mhash \
 		--with-pcre-regex \
-		--with-jpeg \
 		--with-mysql=mysqlnd \
 		--with-mysqli=mysqlnd \
 		--with-pdo-mysql=mysqlnd \
-		--with-freetype \
-		--with-png \
+		--with-freetype-dir=/usr/include/ \
+		--with-png-dir=/usr/include/ \
+		--with-jpeg-dir=/usr/include/ \
 		\
 		--disable-cgi \
 		--disable-debug \

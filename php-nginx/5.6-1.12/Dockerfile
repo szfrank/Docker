@@ -6,8 +6,6 @@
 
 FROM frankyu/phpfpm
 
-ADD consul /bin/consul
-
 LABEL maintainer="Frank Yu <imzhixun@gmail.com>"
 
 ENV NGINX_VERSION 1.12.2
@@ -144,6 +142,9 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+# add consul
+ADD consul /bin/consul
+RUN chmod +x /bin/consul
 
 EXPOSE 80 443
 
